@@ -10,9 +10,12 @@ public class AngryFern : MonoBehaviour
 
     private float health = 0.0f;
     private bool isBeingDamaged = false;
+    private bool hasSpawned = false;
+    int[] choicesArr = {-1,1};
 
     public void Init()
     {
+        hasSpawned = false;
         isBeingDamaged = false;
         health = 0.0f;
     }
@@ -34,13 +37,39 @@ public class AngryFern : MonoBehaviour
         isBeingDamaged = false;
     }
 
+    private void Duplicate()
+    {
+        if(hasSpawned)
+        {
+            return;
+        }
+        else
+        {
+            hasSpawned = true;
+            Vector3 duplicateSpawnPos = GetSpawnOffset();
+            GameObject spawnedObject = Instantiate<GameObject>(gameObject, duplicateSpawnPos, Quaternion.identity, transform.parent.transform);
+            spawnedObject.transform.localScale = new Vector3(1, 1, 1);
+            spawnedObject.name = "Fern";
+        }
+    }
+
+    private Vector3 GetSpawnOffset()
+    {
+        Vector3 duplicateSpawnPos = transform.position;
+        float xOffset = Random.Range(0.5f, 1) * choicesArr[Random.Range(0, choicesArr.Length)];
+        float yOffset = Random.Range(0.5f, 1) * choicesArr[Random.Range(0, choicesArr.Length)];
+        Vector3 spawnOffset = new Vector3(xOffset, yOffset, 0);
+        duplicateSpawnPos += spawnOffset;
+        return duplicateSpawnPos;
+    }
+
     private void Update()
     {
 
         if(health >= maxHealth)
         {
             health = maxHealth;
-
+            Duplicate();
         }
         else if(!isBeingDamaged)
         {
