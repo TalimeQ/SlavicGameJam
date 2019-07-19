@@ -139,10 +139,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8610600376877416429}
   - component: {fileID: 8610600376877416338}
-  - component: {fileID: 8610600376877416339}
   - component: {fileID: 8610600376877416428}
   - component: {fileID: 8610600376877416431}
   - component: {fileID: 8610600376877416425}
+  - component: {fileID: 6684931524117405707}
   m_Layer: 0
   m_Name: gracz
   m_TagString: Untagged
@@ -213,21 +213,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8610600376877416339
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8610600376877416336}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b93723be60db6c48be6200369b9820a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HorizontalInputAxis: Horizontal
-  VerticalInputAxis: Vertical
-  speed: 20
 --- !u!50 &8610600376877416428
 Rigidbody2D:
   serializedVersion: 4
@@ -300,3 +285,18 @@ MonoBehaviour:
   Hp: 0
   MaxHp: 100
   FernDmg: 5
+--- !u!114 &6684931524117405707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8610600376877416336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 635cfdb7036631d49a050ecc6e196fbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HorizontalInputAxis: Horizontal
+  VerticalInputAxis: Vertical
+  speed: 20
