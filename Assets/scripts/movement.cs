@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField] string HorizontalInputAxis = "Horizontal";
-    [SerializeField] string VerticalInputAxis = "Vertical";
+    [SerializeField] string HorizontalInputAxis;
+    [SerializeField] string VerticalInputAxis;
     [SerializeField] float speed = 20;
     Rigidbody2D rigid;
 

@@ -5,9 +5,9 @@ using UnityEngine;
 //Movement for second player
 public class MovementSecond : MonoBehaviour
 {
-    [SerializeField] string HorizontalInputAxis = "Horizontal_2";
-    [SerializeField] string VerticalInputAxis = "Vertical_2";
-    [SerializeField] string MouseAxis = "Mouse_2";
+    [SerializeField] string HorizontalInputAxis;
+    [SerializeField] string VerticalInputAxis;
+    [SerializeField] string MouseAxis;
     [SerializeField] float RotateSpeed = 100; //only for rotating with arrows
     [SerializeField] float speed = 20;
     Rigidbody2D rigid;
