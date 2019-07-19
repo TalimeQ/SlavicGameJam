@@ -6,35 +6,67 @@ public class SpawnerController : MonoBehaviour
     {
     public GameObject plantObject;
     public GameObject SpawnPointParent;
-    private List<Vector3> spawnPoints = new List<Vector3>();
+    private List<Transform> spawnPoints = new List<Transform>();
     [SerializeField]
-    private float timeBetweenSpawns;
+    private float regularTimeBetweenSpawns;
+    [SerializeField]
+    private float longTimeBetweenSpawns;
+    private Dictionary<Transform, bool> occupiedPositions = new Dictionary<Transform, bool>();
 
-    int nextSpawnPointID;
+    private int nextSpawnPointID;
 
 
-    void Start()
+    private void Start()
     {
         foreach (Transform child in SpawnPointParent.transform)
         {
-            spawnPoints.Add(child.position);
-        } 
+            occupiedPositions[child] = false;
+        }
+
+        StartCoroutine(SpawnPlant());
+
     }
 
-    IEnumerator SpawnPlant(Vector3 spawnTransform)
+    IEnumerator SpawnPlant()
     {
-        yield return new WaitForSeconds(timeBetweenSpawns);
-        Instantiate(plantObject, spawnTransform, Quaternion.identity);
+        while (true){
+
+        if (!occupiedPositions.ContainsValue(false))
+        {
+            yield return new WaitForSeconds(longTimeBetweenSpawns);
+        } 
+        else
+        {
+            foreach(KeyValuePair<Transform, bool> entry in occupiedPositions)
+            {
+                if (entry.Value == false)
+                {
+                    spawnPoints.Add(entry.Key);
+                }
+            }
+
+            Transform spawnTransform = spawnPoints[nextSpawnPointID];
+
+            Instantiate(plantObject, spawnTransform.position, Quaternion.identity);
+
+            occupiedPositions[spawnTransform] = true;
+
+            spawnPoints.Clear();
+
+            yield return new WaitForSeconds(regularTimeBetweenSpawns);
+
+        }
+        }
     }
 
-    public void BeginSpawningPlants()
+    public void PickRandomPosition()
     {
             nextSpawnPointID = Random.Range(0, spawnPoints.Count);
-            StartCoroutine(SpawnPlant(spawnPoints[nextSpawnPointID]));
     }
 
-    private void GenerateRandomSpawnID()
+    public void EnableSpawnerPoint(Transform spawnTransform)
     {
-        
+        occupiedPositions[spawnTransform] = false;
     }
+
 }
