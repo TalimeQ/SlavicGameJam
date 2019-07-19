@@ -9,7 +9,7 @@ public class SpawnPoint : MonoBehaviour
     FernIgnore ignoredAxis;
     float ignoredSign;
 
-    private SpawnerController spawningController; 
+    private SpawnerController spawningController;
 
     public void Init(SpawnerController currentSpawner, FernIgnore ignoredAxis, float ignoredSign)
     {
@@ -21,6 +21,7 @@ public class SpawnPoint : MonoBehaviour
 
     public void OnBoundsExtended()
     {
+        Debug.Log("Bounds Extended!");
         SpawnFern();
     }
 
@@ -29,7 +30,7 @@ public class SpawnPoint : MonoBehaviour
         if(spawnedFern != null)
         {
             GameObject spawnedFern = Instantiate(gameObject,transform);
-            spawnedFern.GetComponent<AngryFern>()?.Init(ignoredAxis, ignoredSign);
+            spawnedFern.GetComponent<AngryFern>()?.Init(ignoredAxis, ignoredSign,this);
         }
     }
 

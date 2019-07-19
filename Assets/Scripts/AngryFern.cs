@@ -24,11 +24,13 @@ public class AngryFern : MonoBehaviour
     private bool isBeingDamaged = false;
     private bool hasSpawned = false;
     private int[] choicesArr = {-1,1};
+    private SpawnPoint spawningPoint;
 
-    public void Init(FernIgnore ignoredAxis, float ignoredSign)
+    public void Init(FernIgnore ignoredAxis, float ignoredSign, SpawnPoint owningSpawningPoint)
     {
         hasSpawned = false;
         isBeingDamaged = false;
+        spawningPoint = owningSpawningPoint;
         ignoredAxisSign = 1;
         ignoredAxisSign *= (int) Mathf.Sign(ignoredSign);
         ignoredSpawnAxis = ignoredAxis;
@@ -62,8 +64,9 @@ public class AngryFern : MonoBehaviour
         {
             hasSpawned = true;
             Vector3 duplicateSpawnPos = GetSpawnOffset();
-            GameObject spawnedObject = Instantiate<GameObject>(gameObject, duplicateSpawnPos, Quaternion.identity, transform.parent.transform);
-            spawnedObject.GetComponent<AngryFern>()?.Init(ignoredSpawnAxis, ignoredAxisSign);
+            GameObject spawnedObject = Instantiate(this.gameObject, duplicateSpawnPos, Quaternion.identity, transform.parent.transform);
+            if (spawnedObject == null) Debug.Log("null");
+            spawnedObject.GetComponent<AngryFern>()?.Init(ignoredSpawnAxis, ignoredAxisSign, spawningPoint);
             spawnedObject.GetComponent<AngryFern>()?.CheckBounds();
             spawnedObject.transform.localScale = new Vector3(1, 1, 1);
             spawnedObject.name = "Fern";
@@ -135,7 +138,7 @@ public class AngryFern : MonoBehaviour
 
     private void SignalizeSpawner()
     {
-        Debug.Log("Spawn Signalized");
+        spawningPoint.OnBoundsExtended();
     }
 
     private void Update()
