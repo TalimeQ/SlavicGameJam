@@ -6,18 +6,18 @@ public class SpawnerController : MonoBehaviour
 {
 public GameObject plantObject;
 
+
+
 [SerializeField]
 private float timeBetweenSpawns;
-
-    void Start()
-    {
-    }
-
 
     IEnumerator SpawnPlant()
     {
         yield return new WaitForSeconds(timeBetweenSpawns);
         Instantiate(plantObject, transform.position, Quaternion.identity);
+        
+        
+
     }
 
     public void BeginSpawningPlants()
