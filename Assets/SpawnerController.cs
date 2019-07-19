@@ -24,7 +24,7 @@ public class SpawnerController : MonoBehaviour
     IEnumerator SpawnPlant(Vector3 spawnTransform)
     {
         yield return new WaitForSeconds(timeBetweenSpawns);
-        Instantiate(plantObject, spawnTransform, Quaternion.identity);
+        GameObject spawnedPoint = Instantiate(plantObject, spawnTransform, Quaternion.identity);
     }
 
     public void BeginSpawningPlants()
