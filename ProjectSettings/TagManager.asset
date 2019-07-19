@@ -41,3 +41,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: '[Plane 4] Background'
+    uniqueID: 4250346369
+    locked: 0
+  - name: '[Plane 3] House'
+    uniqueID: 2449800919
+    locked: 0
+  - name: '[Plane 2] House Objects'
+    uniqueID: 2081619549
+    locked: 0
+  - name: '[Plane 1] Player'
+    uniqueID: 1051358151
+    locked: 0
