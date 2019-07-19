@@ -11,8 +11,10 @@ public class SpawnPoint : MonoBehaviour
 
     private SpawnerController spawningController; 
 
-    public void Init(SpawnerController currentSpawner)
+    public void Init(SpawnerController currentSpawner, FernIgnore ignoredAxis, float ignoredSign)
     {
+        ignoredSign = 1;
+        ignoredSign *= Mathf.Sign(ignoredSign);
         spawningController = currentSpawner;
         SpawnFern();
     }
@@ -26,13 +28,13 @@ public class SpawnPoint : MonoBehaviour
     {
         if(spawnedFern != null)
         {
-            GameObject spawnedFern = Instantiate(gameObject, this.transform);
-            spawnedFern.GetComponent<AngryFern>()?.Init()
+            GameObject spawnedFern = Instantiate(gameObject,transform);
+            spawnedFern.GetComponent<AngryFern>()?.Init(ignoredAxis, ignoredSign);
         }
     }
 
     private void OnDisable()
     {
-        
+        spawningController.EnableSpawnerPoint(transform);
     }
 }
