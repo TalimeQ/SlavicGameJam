@@ -1,6 +1,8 @@
 ﻿using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEngine.UI;
+using TMPro;
+using System;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
@@ -10,17 +12,24 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject GameOverScreen;
     [SerializeField] private Image filledBar;
     [SerializeField] private SpawnerController spawnController;
+    [SerializeField] TextMeshProUGUI TimeSurvivedPanel;
+
+    [SerializeField] float TimeFromGameStart = 0;
 
     private float corruptionLevel;
 
     private void Start()
     {
+        TimeFromGameStart = 0;
         corruptionLevel = 0;
         StartCoroutine(UpdateCorruption());
     }
 
     private void Update()
     {
+        if (!GameOverScreen.activeSelf)
+            TimeFromGameStart += Time.deltaTime;
+
         if(Input.GetKey(KeyCode.R))
         {
             Restart();
@@ -49,6 +58,7 @@ public class GameController : MonoBehaviour
     
     private void PlayerLost()
     {
+        TimeSurvivedPanel.text = (Math.Round(TimeFromGameStart, 2)).ToString() + "s";
         StopAllCoroutines();
         spawnController.DisableSpawning();
         GameOverScreen.SetActive(true);
