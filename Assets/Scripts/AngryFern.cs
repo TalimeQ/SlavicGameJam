@@ -22,6 +22,7 @@ public class AngryFern : MonoBehaviour
     [SerializeField] private Vector2 maxBounds;
     [SerializeField] private FernIgnore ignoredSpawnAxis;
     [SerializeField] private int ignoredAxisSign = 1;
+    [SerializeField] private GameObject PlantParticleSystem;
   
     private float health = 0.0f;
 
@@ -49,6 +50,7 @@ public class AngryFern : MonoBehaviour
         SetScale();
         if (health <= 0  && !isDead)
         {
+            Instantiate(PlantParticleSystem, transform.position, Quaternion.identity);
             isDead = true;
             playerWeaponRef.RemoveFern(this);
             health = 0;

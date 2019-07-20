@@ -56,3 +56,6 @@ TagManager:
   - name: '[Plane 1] Player'
     uniqueID: 1051358151
     locked: 0
+  - name: Effects
+    uniqueID: 1428718189
+    locked: 0
