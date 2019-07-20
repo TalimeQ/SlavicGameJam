@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using PlayerCombat;
 
 
 public enum FernIgnore
@@ -8,6 +9,7 @@ public enum FernIgnore
     ignoreX,
     ignoreY
 }
+
 public class AngryFern : MonoBehaviour
 {
     [SerializeField] private float growthRate;
@@ -22,6 +24,7 @@ public class AngryFern : MonoBehaviour
   
     private float health = 0.0f;
     private bool isBeingDamaged = false;
+    private bool isDead = false;
     private bool hasSpawned = false;
     private int[] choicesArr = {-1,1};
     private SpawnPoint spawningPoint;
@@ -30,23 +33,26 @@ public class AngryFern : MonoBehaviour
     {
         hasSpawned = false;
         isBeingDamaged = false;
+        isDead = false;
         spawningPoint = owningSpawningPoint;
         ignoredAxisSign = 1;
         ignoredAxisSign *= (int) Mathf.Sign(ignoredSign);
         ignoredSpawnAxis = ignoredAxis;
-        health = 0.0f;
+        health = 0.1f;
     }
 
-    public void OnWeaponDamaged(float Damage)
+    public void OnWeaponDamaged(float Damage, PlayerWeapon playerWeaponRef)
     {
         isBeingDamaged = true;
-        health -= Damage * Time.deltaTime;
-        transform.localScale -= Damage * transform.localScale; 
-        Debug.Log(Damage * transform.localScale * Time.deltaTime);
-        if (health <= 0)
+        health -= Damage;
+        SetScale();
+        if (health <= 0  && !isDead)
         {
+            isDead = true;
+            playerWeaponRef.RemoveFern(this);
             health = 0;
             gameObject.SetActive(false);
+          
         }
     }
 
@@ -65,12 +71,14 @@ public class AngryFern : MonoBehaviour
         {
             hasSpawned = true;
             Vector3 duplicateSpawnPos = GetSpawnOffset();
-            GameObject spawnedObject = Instantiate(this.gameObject, duplicateSpawnPos, Quaternion.identity, transform.parent.transform);
-            if (spawnedObject == null) Debug.Log("null");
-            spawnedObject.GetComponent<AngryFern>()?.Init(ignoredSpawnAxis, ignoredAxisSign, spawningPoint);
-            spawnedObject.GetComponent<AngryFern>()?.CheckBounds();
-            spawnedObject.transform.localScale = new Vector3(1, 1, 1);
-            spawnedObject.name = "Fern";
+            GameObject spawnedFern = FernPooler.fernPool.GetFern();
+            spawnedFern.transform.position = duplicateSpawnPos;
+            spawnedFern.transform.parent = transform.parent.transform;
+            spawnedFern.GetComponent<AngryFern>()?.Init(ignoredSpawnAxis, ignoredAxisSign, spawningPoint);
+            spawnedFern.GetComponent<AngryFern>()?.CheckBounds();
+            spawnedFern.transform.localScale = new Vector3(1, 1, 1);
+            spawnedFern.name = "Fern";
+            spawnedFern.SetActive(true);
         }
     }
 
@@ -86,6 +94,12 @@ public class AngryFern : MonoBehaviour
         Vector3 spawnOffset = new Vector3(xOffset, yOffset, 0);
         duplicateSpawnPos += spawnOffset;
         return duplicateSpawnPos;
+    }
+
+    private void SetScale()
+    {
+        float scale = maxHealth / health;
+        transform.localScale = maxScale / scale;
     }
 
     private void GetSpawnRanges(out Vector3 minimalRange, out Vector3 maximalRange)
@@ -139,12 +153,11 @@ public class AngryFern : MonoBehaviour
 
     private void SignalizeSpawner()
     {
-        spawningPoint.OnBoundsExtended();
+        spawningPoint.SignalizeInactivity();
     }
 
     private void Update()
     {
-
         if(health >= maxHealth)
         {
             health = maxHealth;
@@ -152,8 +165,8 @@ public class AngryFern : MonoBehaviour
         }
         else if(!isBeingDamaged)
         {
-            transform.localScale += growthRate * transform.localScale * Time.deltaTime;
             health += growthRate * Time.deltaTime;
+            SetScale();
         }
     }
 

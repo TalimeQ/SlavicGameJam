@@ -5,14 +5,14 @@ using UnityEngine;
 public class FernPooler : MonoBehaviour
 {
     public int StartingPool = 10;
-    public static FernPooler singleton;
+    public static FernPooler fernPool;
 
     List<GameObject> pool = new List<GameObject>();
     [SerializeField] GameObject FernPrefab;
 
     void Awake()
     {
-        singleton = this;
+        fernPool = this;
         GameObject G;
         for(int i = 0; i < StartingPool; i++)
         {
@@ -26,9 +26,8 @@ public class FernPooler : MonoBehaviour
     {
         for(int i = 0; i < pool.Count; i++)
         {
-            if(pool[i].activeInHierarchy)
+            if(!pool[i].activeInHierarchy)
             {
-                pool[i].SetActive(true);
                 return pool[i];
             }
         }

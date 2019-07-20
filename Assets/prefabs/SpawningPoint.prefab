@@ -45,3 +45,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnedFern: {fileID: 8004041675544829567, guid: 88b4f09a625785e4a8fb80f28ceba6b8,
     type: 3}
+  timeToDeactivation: 15
