@@ -114,7 +114,7 @@ public class SpawnerController : MonoBehaviour
                         spawnPoints.Add(entry.Key);
                     }
                 }
-                    Debug.Log("Spawning");
+                    PickRandomPosition();
                     Transform spawnTransform = spawnPoints[nextSpawnPointID];
                     CreateSpawner(spawnTransform);
                     occupiedPositions[spawnTransform] = true;
