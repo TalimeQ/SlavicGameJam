@@ -120,7 +120,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.04553616, y: 0.07894921}
+  m_Offset: {x: -0.04553616, y: 0.60645986}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -131,7 +131,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.2471716, y: 1.551173}
+  m_Size: {x: 1.2471716, y: 0.49615166}
   m_EdgeRadius: 0
 --- !u!1 &2189101084322838284
 GameObject:
@@ -386,8 +386,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RotateSpeed: 600
-  speed: 15
-  PadSpeed: 16
+  JoystickSpeed: 16
 --- !u!58 &6858500591044034782
 CircleCollider2D:
   m_ObjectHideFlags: 0
