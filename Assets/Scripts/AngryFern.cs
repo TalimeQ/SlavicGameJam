@@ -53,7 +53,6 @@ public class AngryFern : MonoBehaviour
             playerWeaponRef.RemoveFern(this);
             health = 0;
             gameObject.SetActive(false);
-          
         }
     }
 

@@ -22,6 +22,16 @@ public class FernPooler : MonoBehaviour
         }
     }
 
+    public static int GetActiveFerns()
+    {
+        int activeFerns = 0;
+        foreach(GameObject fern in fernPool.pool)
+        {
+            if (fern.activeInHierarchy) activeFerns++;
+        }
+        return activeFerns;
+    }
+
     public GameObject GetFern()
     {
         for(int i = 0; i < pool.Count; i++)
