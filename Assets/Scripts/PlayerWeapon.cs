@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace PlayerCombat
@@ -41,7 +40,6 @@ namespace PlayerCombat
         private void OnTriggerExit2D(Collider2D collision)
         {
             AngryFern fernToCut = collision.GetComponent<AngryFern>();
-            fernToCut.FinishedDamaging();
             if (fernToCut != null)
             {
                 currentlyCollidingFerns.Remove(fernToCut);

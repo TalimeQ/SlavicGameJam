@@ -16,6 +16,7 @@ public class AngryFern : MonoBehaviour
     [SerializeField] private float maxHealth;
     [SerializeField] private float minimalRange;
     [SerializeField] private float maximalRange;
+    [SerializeField] private float damageGrowthInterval;
     [SerializeField] private Vector3 maxScale;
     [SerializeField] private Vector2 minBounds;
     [SerializeField] private Vector2 maxBounds;
@@ -23,7 +24,8 @@ public class AngryFern : MonoBehaviour
     [SerializeField] private int ignoredAxisSign = 1;
   
     private float health = 0.0f;
-    private bool isBeingDamaged = false;
+
+    private float growthStart;
     private bool isDead = false;
     private bool hasSpawned = false;
     private int[] choicesArr = {-1,1};
@@ -32,7 +34,6 @@ public class AngryFern : MonoBehaviour
     public void Init(FernIgnore ignoredAxis, float ignoredSign, SpawnPoint owningSpawningPoint)
     {
         hasSpawned = false;
-        isBeingDamaged = false;
         isDead = false;
         spawningPoint = owningSpawningPoint;
         ignoredAxisSign = 1;
@@ -43,7 +44,7 @@ public class AngryFern : MonoBehaviour
 
     public void OnWeaponDamaged(float Damage, PlayerWeapon playerWeaponRef)
     {
-        isBeingDamaged = true;
+        TimerInit();
         health -= Damage;
         SetScale();
         if (health <= 0  && !isDead)
@@ -54,11 +55,6 @@ public class AngryFern : MonoBehaviour
             gameObject.SetActive(false);
           
         }
-    }
-
-    public void FinishedDamaging()
-    {
-        isBeingDamaged = false;
     }
 
     private void Duplicate()
@@ -163,11 +159,15 @@ public class AngryFern : MonoBehaviour
             health = maxHealth;
             Duplicate();
         }
-        else if(!isBeingDamaged)
+        else if(Time.time > growthStart)
         {
             health += growthRate * Time.deltaTime;
             SetScale();
         }
     }
 
+    private void TimerInit()
+    {
+        growthStart = Time.time + damageGrowthInterval;
+    }
 }

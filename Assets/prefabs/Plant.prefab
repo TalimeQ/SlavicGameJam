@@ -94,8 +94,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   growthRate: 3
   maxHealth: 2
-  minimalRange: 0.3
-  maximalRange: 0.4
+  minimalRange: 0.5
+  maximalRange: 0.7
+  damageGrowthInterval: 0.15
   maxScale: {x: 8, y: 8, z: 8}
   minBounds: {x: -5, y: -5}
   maxBounds: {x: 5, y: 4.5}
