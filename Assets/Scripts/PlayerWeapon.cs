@@ -69,10 +69,10 @@ namespace PlayerCombat
             }
         }
 
-        private void OnTriggerExit(Collider other)
+        private void OnTriggerExit2D(Collider2D collision)
         {
             Debug.Log("Quit");
-            AngryFern fernToCut = other.GetComponent<AngryFern>();
+            AngryFern fernToCut = collision.GetComponent<AngryFern>();
             if (fernToCut != null)
             {
                 currentlyCollidingFerns.Remove(fernToCut);
