@@ -17,33 +17,10 @@ namespace PlayerCombat
         private DamageType currentDamageType = DamageType.Green;
         private HashSet<AngryFern> currentlyCollidingFerns = new HashSet<AngryFern>();
 
-        private void Update()
-        {
-           if(Input.GetMouseButton(0)) OnWeaponFire();
-           if(Input.GetMouseButton(0)) FinishedFiring();
-        }
-
         public void OnWeaponSwitch()
         {
             currentDamageType++;
             if (currentDamageType >= DamageType.Yellow) currentDamageType = DamageType.Green;
-        }
-
-        public void OnWeaponFire()
-        {
-            FireWeapon();
-        }
-
-        public void FinishedFiring()
-        {
-            if (currentlyCollidingFerns.Count == 0)
-            {
-                return;
-            }
-            foreach (AngryFern damagedFern in currentlyCollidingFerns)
-            {
-                damagedFern.FinishedDamaging();
-            }
         }
 
         public void RemoveFern(AngryFern fernToCut)
@@ -51,21 +28,10 @@ namespace PlayerCombat
             currentlyCollidingFerns.Remove(fernToCut);
         }
 
-        private void FireWeapon()
-        {
-            if(currentlyCollidingFerns.Count == 0)
-            {
-                return;
-            }
-            foreach(AngryFern damagedFern in currentlyCollidingFerns)
-            {
-                damagedFern.OnWeaponDamaged(damage,this);
-            }
-        }
-
         private void OnTriggerEnter2D(Collider2D collision)
         {
             AngryFern fernToCut = collision.GetComponent<AngryFern>();
+            fernToCut.OnWeaponDamaged(damage, this);
             if(fernToCut != null)
             {
                 currentlyCollidingFerns.Add(fernToCut);
@@ -75,6 +41,7 @@ namespace PlayerCombat
         private void OnTriggerExit2D(Collider2D collision)
         {
             AngryFern fernToCut = collision.GetComponent<AngryFern>();
+            fernToCut.FinishedDamaging();
             if (fernToCut != null)
             {
                 currentlyCollidingFerns.Remove(fernToCut);

@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class SpawnPoint : MonoBehaviour
 {
 
     [SerializeField] private GameObject spawnedFern = null;
+    [SerializeField] private float timeToDeactivation = 7.0f;
     FernIgnore ignoredAxis;
     float ignoredSign;
 
@@ -15,6 +18,8 @@ public class SpawnPoint : MonoBehaviour
         ignoredSign *= Mathf.Sign(ignoredSign);
         spawningController = currentSpawner;
         SpawnFern();
+        StartCoroutine(DisableSpawnPoint());
+
     }
 
     public void SignalizeInactivity()
@@ -35,5 +40,12 @@ public class SpawnPoint : MonoBehaviour
     private void OnDisable()
     {
         spawningController.EnableSpawnerPoint(transform);
+    }
+
+    IEnumerator DisableSpawnPoint()
+    {
+        yield return new WaitForSeconds(timeToDeactivation);
+        gameObject.SetActive(false);
+        StopCoroutine(DisableSpawnPoint());
     }
 }

@@ -92,11 +92,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 163155bad119b1547a6431569b13bb40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  growthRate: 2
-  maxHealth: 1.7
+  growthRate: 3
+  maxHealth: 2
   minimalRange: 0.3
   maximalRange: 0.4
-  maxScale: {x: 2, y: 2, z: 2}
+  maxScale: {x: 8, y: 8, z: 8}
   minBounds: {x: -5, y: -5}
   maxBounds: {x: 5, y: 4.5}
   ignoredSpawnAxis: 0

@@ -41,16 +41,11 @@ public class AngryFern : MonoBehaviour
         health = 0.1f;
     }
 
-    public void OnDisable()
-    {
-
-    }
-
     public void OnWeaponDamaged(float Damage, PlayerWeapon playerWeaponRef)
     {
         isBeingDamaged = true;
         health -= Damage;
-        transform.localScale -= Damage * transform.localScale; 
+        SetScale();
         if (health <= 0  && !isDead)
         {
             isDead = true;
@@ -99,6 +94,12 @@ public class AngryFern : MonoBehaviour
         Vector3 spawnOffset = new Vector3(xOffset, yOffset, 0);
         duplicateSpawnPos += spawnOffset;
         return duplicateSpawnPos;
+    }
+
+    private void SetScale()
+    {
+        float scale = maxHealth / health;
+        transform.localScale = maxScale / scale;
     }
 
     private void GetSpawnRanges(out Vector3 minimalRange, out Vector3 maximalRange)
@@ -164,8 +165,8 @@ public class AngryFern : MonoBehaviour
         }
         else if(!isBeingDamaged)
         {
-            transform.localScale += growthRate * transform.localScale * Time.deltaTime;
             health += growthRate * Time.deltaTime;
+            SetScale();
         }
     }
 
