@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace PlayerCombat
 { 
-
     public enum DamageType
     {
         Green,
@@ -47,6 +46,11 @@ namespace PlayerCombat
             }
         }
 
+        public void RemoveFern(AngryFern fernToCut)
+        {
+            currentlyCollidingFerns.Remove(fernToCut);
+        }
+
         private void FireWeapon()
         {
             if(currentlyCollidingFerns.Count == 0)
@@ -55,13 +59,12 @@ namespace PlayerCombat
             }
             foreach(AngryFern damagedFern in currentlyCollidingFerns)
             {
-                damagedFern.OnWeaponDamaged(damage);
+                damagedFern.OnWeaponDamaged(damage,this);
             }
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            Debug.Log("entered");
             AngryFern fernToCut = collision.GetComponent<AngryFern>();
             if(fernToCut != null)
             {
@@ -71,7 +74,6 @@ namespace PlayerCombat
 
         private void OnTriggerExit2D(Collider2D collision)
         {
-            Debug.Log("Quit");
             AngryFern fernToCut = collision.GetComponent<AngryFern>();
             if (fernToCut != null)
             {

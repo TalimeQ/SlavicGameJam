@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SpawnPoint : MonoBehaviour
 {
@@ -19,18 +17,19 @@ public class SpawnPoint : MonoBehaviour
         SpawnFern();
     }
 
-    public void OnBoundsExtended()
+    public void SignalizeInactivity()
     {
         SpawnFern();
     }
 
     private void SpawnFern()
     {
-        if(spawnedFern != null)
-        {
-            GameObject createdFern = Instantiate(spawnedFern,transform.position,Quaternion.identity,transform);
-            createdFern.GetComponent<AngryFern>()?.Init(ignoredAxis, ignoredSign,this);
-        }
+        GameObject spawnedFern = FernPooler.fernPool.GetFern();
+        spawnedFern.transform.position = transform.position;
+        spawnedFern.transform.parent = transform.parent.transform;
+        spawnedFern.GetComponent<AngryFern>()?.Init(ignoredAxis, ignoredSign, this);
+        spawnedFern.transform.localScale = new Vector3(1, 1, 1);
+        spawnedFern.SetActive(true);
     }
 
     private void OnDisable()
