@@ -22,11 +22,7 @@ public class MovementSecond : MonoBehaviour
 
     void Update()
     {
-
-        if (Input.GetKey(KeyCode.RightArrow))
-            transform.Rotate(0, 0, -RotateSpeed * Time.deltaTime);
-        if (Input.GetKey(KeyCode.LeftArrow))
-            transform.Rotate(0, 0, RotateSpeed * Time.deltaTime);
+        transform.Rotate(0, 0, Input.GetAxis(MouseAxis)* RotateSpeed * Time.deltaTime);
 
         direction = new Vector2(Input.GetAxis(HorizontalInputAxis), Input.GetAxis(VerticalInputAxis));
     }
