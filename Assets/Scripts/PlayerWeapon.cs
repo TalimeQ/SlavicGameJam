@@ -20,8 +20,8 @@ namespace PlayerCombat
 
         private void Update()
         {
-           if( Input.GetMouseButton(0)) OnWeaponFire();
-           if (Input.GetMouseButton(0)) FinishedFiring();
+           if(Input.GetMouseButton(0)) OnWeaponFire();
+           if(Input.GetMouseButton(0)) FinishedFiring();
         }
 
         public void OnWeaponSwitch()
@@ -61,6 +61,7 @@ namespace PlayerCombat
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
+            Debug.Log("entered");
             AngryFern fernToCut = collision.GetComponent<AngryFern>();
             if(fernToCut != null)
             {
@@ -70,6 +71,7 @@ namespace PlayerCombat
 
         private void OnTriggerExit(Collider other)
         {
+            Debug.Log("Quit");
             AngryFern fernToCut = other.GetComponent<AngryFern>();
             if (fernToCut != null)
             {

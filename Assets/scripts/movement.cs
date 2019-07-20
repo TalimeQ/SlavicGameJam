@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField] string HorizontalInputAxis;
-    [SerializeField] string VerticalInputAxis;
+    [SerializeField] string HorizontalInputAxis = "Horizontal";
+    [SerializeField] string VerticalInputAxis = "Vertical";
     [SerializeField] float speed = 20;
     Rigidbody2D rigid;
+    private Vector2 direction;
+
 
 
     void Awake()
@@ -18,12 +20,17 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
+        direction = new Vector2(Input.GetAxis(HorizontalInputAxis), Input.GetAxis(VerticalInputAxis));
+    }
+    
+
+    private void FixedUpdate()
+    {
+        rigid.MovePosition(new Vector2(transform.position.x, transform.position.y) + direction * speed * Time.fixedDeltaTime);
+
         Vector3 diff = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        diff.Normalize(); 
+        diff.Normalize();
         float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
-
-        Vector2 direction = new Vector2(Input.GetAxis(HorizontalInputAxis), Input.GetAxis(VerticalInputAxis));
-        rigid.MovePosition(new Vector2(transform.position.x, transform.position.y) + direction * speed * Time.deltaTime);
     }
 }
