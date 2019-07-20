@@ -10,11 +10,12 @@ public class SpawnerController : MonoBehaviour
     [SerializeField] private Vector2 minBounds;
     [SerializeField] private Vector2 maxBounds;
     [SerializeField] private List<Transform> spawnPoints = new List<Transform>();
+    [SerializeField] private List<GameObject> spawners = new List<GameObject>();
 
     private Dictionary<Transform, bool> occupiedPositions = new Dictionary<Transform, bool>();
     private int nextSpawnPointID;
-
-
+    private bool shouldSpawn = true;
+    Coroutine lastRoutine = null;
 
 
     public void PickRandomPosition()
@@ -29,7 +30,16 @@ public class SpawnerController : MonoBehaviour
 
     public void DisableSpawning()
     {
-        StopCoroutine(SpawnPlant());
+        StopCoroutine(lastRoutine);
+        Deinit();
+    }
+
+    private void Deinit()
+    {
+        foreach (GameObject spawn in spawners)
+        {
+            spawn.SetActive(false);
+        }
     }
 
     private void Start()
@@ -38,9 +48,7 @@ public class SpawnerController : MonoBehaviour
         {
             occupiedPositions[spawnPoint] = false;
         }
-
-        StartCoroutine(SpawnPlant());
-
+        lastRoutine =  StartCoroutine(SpawnPlant());
     }
 
     private void CreateSpawner(Transform spawnTransform)
@@ -49,6 +57,7 @@ public class SpawnerController : MonoBehaviour
         float ignoredSign;
         CompareSpawnedPosition(spawnTransform, out ignoredAxis, out ignoredSign);
         GameObject currentSpawner = Instantiate(plantObject, spawnTransform.position, Quaternion.identity, transform);
+        spawners.Add(currentSpawner);
         currentSpawner.GetComponent<SpawnPoint>()?.Init(this, ignoredAxis, ignoredSign);
     
     }
@@ -105,13 +114,12 @@ public class SpawnerController : MonoBehaviour
                         spawnPoints.Add(entry.Key);
                     }
                 }
-
-                Transform spawnTransform = spawnPoints[nextSpawnPointID];
-                CreateSpawner(spawnTransform);
-                occupiedPositions[spawnTransform] = true;
-                spawnPoints.Clear();
-                yield return new WaitForSeconds(regularTimeBetweenSpawns);
-
+                    Debug.Log("Spawning");
+                    Transform spawnTransform = spawnPoints[nextSpawnPointID];
+                    CreateSpawner(spawnTransform);
+                    occupiedPositions[spawnTransform] = true;
+                    spawnPoints.Clear();
+                    yield return new WaitForSeconds(regularTimeBetweenSpawns);
             }
         }
     }
