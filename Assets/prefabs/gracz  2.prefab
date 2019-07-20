@@ -282,7 +282,6 @@ GameObject:
   - component: {fileID: 3564269150326170825}
   - component: {fileID: 6858500591044034782}
   - component: {fileID: 1010093774}
-  - component: {fileID: 1010093775}
   m_Layer: 0
   m_Name: gracz  2
   m_TagString: Untagged
@@ -386,11 +385,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22993c58a87859448bc68d131a112f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HorizontalInputAxis: Horizontal_2
-  VerticalInputAxis: Vertical_2
-  MouseAxis: Mouse_2
   RotateSpeed: 600
   speed: 15
+  PadSpeed: 16
 --- !u!58 &6858500591044034782
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -503,17 +500,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1010093775
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3564269150326170822}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5eeb34eec04da614197464fec3769f7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HorizontalAxisString: Horizontal_2
-  VerticalAxisString: Vertical_2
