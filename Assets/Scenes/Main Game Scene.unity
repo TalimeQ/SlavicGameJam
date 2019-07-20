@@ -1351,6 +1351,7 @@ MonoBehaviour:
   maxCorruption: 600
   corruptionPerFern: 0.1
   filledBar: {fileID: 1604485285}
+  spawnController: {fileID: 2021652890}
 --- !u!1 &2023873563
 GameObject:
   m_ObjectHideFlags: 0

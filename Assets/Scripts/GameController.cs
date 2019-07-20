@@ -8,6 +8,8 @@ public class GameController : MonoBehaviour
     [SerializeField] private float maxCorruption;
     [SerializeField] private float corruptionPerFern;
     [SerializeField] private Image filledBar;
+    [SerializeField] private SpawnerController spawnController;
+
     private float corruptionLevel;
 
     private void Start()
@@ -42,12 +44,12 @@ public class GameController : MonoBehaviour
             }
             yield return new WaitForSeconds(1);
         }
-
     }
     
     private void PlayerLost()
     {
-        Debug.Log("Lost!");
         StopAllCoroutines();
+        spawnController.DisableSpawning();
+        FernPooler.DisableFerns();
     }
 }

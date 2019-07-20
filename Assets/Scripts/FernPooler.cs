@@ -32,6 +32,14 @@ public class FernPooler : MonoBehaviour
         return activeFerns;
     }
 
+    public static void DisableFerns()
+    {
+        foreach (GameObject fern in fernPool.pool)
+        {
+            fern.SetActive(false);
+        }
+    }
+
     public GameObject GetFern()
     {
         for(int i = 0; i < pool.Count; i++)

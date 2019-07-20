@@ -27,6 +27,11 @@ public class SpawnerController : MonoBehaviour
         occupiedPositions[spawnTransform] = false;
     }
 
+    public void DisableSpawning()
+    {
+        StopCoroutine(SpawnPlant());
+    }
+
     private void Start()
     {
         foreach (Transform spawnPoint  in spawnPoints)
@@ -37,6 +42,7 @@ public class SpawnerController : MonoBehaviour
         StartCoroutine(SpawnPlant());
 
     }
+
     private void CreateSpawner(Transform spawnTransform)
     {
         FernIgnore ignoredAxis;
