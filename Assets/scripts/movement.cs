@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movement : MonoBehaviour
+public class movement : MonoBehaviour
 {
     [SerializeField] string HorizontalInputAxis = "Horizontal";
     [SerializeField] string VerticalInputAxis = "Vertical";
