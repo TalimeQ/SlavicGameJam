@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class movement : MonoBehaviour
+public class Movement : MonoBehaviour
 {
-    public float speed = 20;
+    [SerializeField] string HorizontalInputAxis = "Horizontal";
+    [SerializeField] string VerticalInputAxis = "Vertical";
+    [SerializeField] float speed = 20;
     Rigidbody2D rigid;
 
 
@@ -14,16 +16,14 @@ public class movement : MonoBehaviour
     }
 
 
-
     void Update()
     {
         Vector3 diff = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         diff.Normalize();
-
         float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
 
-        Vector2 dir = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * speed *Time.deltaTime;
-        rigid.MovePosition(new Vector2(transform.position.x, transform.position.y) + dir * speed * Time.deltaTime);
+        Vector2 direction = new Vector2(Input.GetAxis(HorizontalInputAxis), Input.GetAxis(VerticalInputAxis));
+        rigid.MovePosition(new Vector2(transform.position.x, transform.position.y) + direction * speed * Time.deltaTime);
     }
 }
