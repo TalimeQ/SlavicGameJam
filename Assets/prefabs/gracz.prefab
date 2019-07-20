@@ -269,7 +269,6 @@ GameObject:
   - component: {fileID: 8610600376877416425}
   - component: {fileID: 6684931524117405707}
   - component: {fileID: 971276034602923592}
-  - component: {fileID: 7739543220570859092}
   - component: {fileID: 6684986249444121949}
   m_Layer: 0
   m_Name: gracz
@@ -389,9 +388,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 635cfdb7036631d49a050ecc6e196fbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HorizontalInputAxis: Horizontal
-  VerticalInputAxis: Vertical
+  RotateSpeed: 100
   speed: 8
+  PadSpeed: 16
 --- !u!58 &971276034602923592
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -408,20 +407,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.565
---- !u!114 &7739543220570859092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8610600376877416336}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5eeb34eec04da614197464fec3769f7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HorizontalAxisString: Horizontal
-  VerticalAxisString: Vertical
 --- !u!82 &6684986249444121949
 AudioSource:
   m_ObjectHideFlags: 0
