@@ -390,7 +390,7 @@ MonoBehaviour:
   VerticalInputAxis: Vertical_2
   MouseAxis: Mouse_2
   RotateSpeed: 600
-  speed: 8
+  speed: 15
 --- !u!58 &6858500591044034782
 CircleCollider2D:
   m_ObjectHideFlags: 0

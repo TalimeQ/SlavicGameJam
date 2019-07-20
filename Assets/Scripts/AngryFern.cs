@@ -22,6 +22,8 @@ public class AngryFern : MonoBehaviour
     [SerializeField] private Vector2 maxBounds;
     [SerializeField] private FernIgnore ignoredSpawnAxis;
     [SerializeField] private int ignoredAxisSign = 1;
+    [SerializeField] private GameObject plantParticleSystem;
+    [SerializeField] private AudioClip deathAudioClip;
   
     private float health = 0.0f;
 
@@ -49,6 +51,8 @@ public class AngryFern : MonoBehaviour
         SetScale();
         if (health <= 0  && !isDead)
         {
+            Instantiate(plantParticleSystem, transform.position, plantParticleSystem.transform.rotation);
+            AudioSource.PlayClipAtPoint(deathAudioClip, transform.position);
             isDead = true;
             playerWeaponRef.RemoveFern(this);
             health = 0;

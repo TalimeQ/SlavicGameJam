@@ -102,6 +102,9 @@ MonoBehaviour:
   maxBounds: {x: 5, y: 4.5}
   ignoredSpawnAxis: 0
   ignoredAxisSign: 1
+  plantParticleSystem: {fileID: 4411062012203063501, guid: 7befd3c5dd2341a4ba359b588465c17d,
+    type: 3}
+  deathAudioClip: {fileID: 8300000, guid: 1e7065755c8c70f40bd9684e411dee02, type: 3}
 --- !u!58 &8502338761223025705
 CircleCollider2D:
   m_ObjectHideFlags: 0
