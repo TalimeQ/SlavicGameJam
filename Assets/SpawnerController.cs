@@ -40,7 +40,6 @@ public class SpawnerController : MonoBehaviour
     }
     private void CreateSpawner(Transform spawnTransform)
     {
-        Debug.Log(spawnTransform.position);
         FernIgnore ignoredAxis;
         float ignoredSign;
         CompareSpawnedPosition(spawnTransform, out ignoredAxis, out ignoredSign);

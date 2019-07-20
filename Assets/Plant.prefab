@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8004041675544829566}
   - component: {fileID: 8216353689376190384}
   - component: {fileID: 1065110124095758562}
+  - component: {fileID: 8502338761223025705}
   m_Layer: 0
   m_Name: Plant
   m_TagString: Untagged
@@ -100,3 +101,19 @@ MonoBehaviour:
   maxBounds: {x: 5, y: 4.5}
   ignoredSpawnAxis: 0
   ignoredAxisSign: 1
+--- !u!58 &8502338761223025705
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8004041675544829567}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.1

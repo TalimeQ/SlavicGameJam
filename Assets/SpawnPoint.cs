@@ -13,7 +13,6 @@ public class SpawnPoint : MonoBehaviour
 
     public void Init(SpawnerController currentSpawner, FernIgnore ignoredAxis, float ignoredSign)
     {
-        Debug.Log("Initialized!");
         ignoredSign = 1;
         ignoredSign *= Mathf.Sign(ignoredSign);
         spawningController = currentSpawner;
