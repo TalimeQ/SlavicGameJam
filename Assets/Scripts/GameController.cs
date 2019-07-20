@@ -7,6 +7,7 @@ public class GameController : MonoBehaviour
 {
     [SerializeField] private float maxCorruption;
     [SerializeField] private float corruptionPerFern;
+    [SerializeField] private GameObject GameOverScreen;
     [SerializeField] private Image filledBar;
     [SerializeField] private SpawnerController spawnController;
 
@@ -50,6 +51,7 @@ public class GameController : MonoBehaviour
     {
         StopAllCoroutines();
         spawnController.DisableSpawning();
+        GameOverScreen.SetActive(true);
         FernPooler.DisableFerns();
     }
 }
