@@ -11,6 +11,7 @@ public class MovementSecond : MonoBehaviour
     [SerializeField] float RotateSpeed = 100; //only for rotating with arrows
     [SerializeField] float speed = 20;
     Rigidbody2D rigid;
+    private Vector2 direction;
 
 
     void Awake()
@@ -20,12 +21,18 @@ public class MovementSecond : MonoBehaviour
 
     void Update()
     {
+
         if (Input.GetKey(KeyCode.RightArrow))
             transform.Rotate(0, 0, -RotateSpeed * Time.deltaTime);
         if (Input.GetKey(KeyCode.LeftArrow))
             transform.Rotate(0, 0, RotateSpeed * Time.deltaTime);
 
-        Vector2 direction = new Vector2(Input.GetAxis(HorizontalInputAxis), Input.GetAxis(VerticalInputAxis));
-        rigid.MovePosition(new Vector2(transform.position.x, transform.position.y) + direction * speed * Time.deltaTime);
+        direction = new Vector2(Input.GetAxis(HorizontalInputAxis), Input.GetAxis(VerticalInputAxis));
     }
+
+    private void FixedUpdate()
+    {
+        rigid.MovePosition(new Vector2(transform.position.x, transform.position.y) + direction * speed * Time.fixedDeltaTime);
+    }
+
 }
