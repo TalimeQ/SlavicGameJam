@@ -14,6 +14,7 @@ public class MovementSecond : MonoBehaviour
     private Vector2 direction;
 
 
+
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
