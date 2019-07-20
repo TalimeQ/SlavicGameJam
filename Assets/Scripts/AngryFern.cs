@@ -41,7 +41,8 @@ public class AngryFern : MonoBehaviour
     {
         isBeingDamaged = true;
         health -= Damage * Time.deltaTime;
-        transform.localScale -= Damage * transform.localScale * Time.deltaTime;
+        transform.localScale -= Damage * transform.localScale; 
+        Debug.Log(Damage * transform.localScale * Time.deltaTime);
         if (health <= 0)
         {
             health = 0;
