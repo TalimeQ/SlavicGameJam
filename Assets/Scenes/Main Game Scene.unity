@@ -1671,8 +1671,8 @@ MonoBehaviour:
     type: 3}
   regularTimeBetweenSpawns: 1
   longTimeBetweenSpawns: 4
-  minBounds: {x: -4, y: 4}
-  maxBounds: {x: -4, y: 4}
+  minBounds: {x: -4, y: -4}
+  maxBounds: {x: 4, y: 4}
   spawnPoints:
   - {fileID: 728010088}
   - {fileID: 936866777}
