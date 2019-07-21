@@ -14,12 +14,9 @@ public class SpawnPoint : MonoBehaviour
 
     public void Init(SpawnerController currentSpawner, FernIgnore ignoredAxis, float ignoredSign)
     {
-        Debug.Log(ignoredAxis);
         this.ignoredSign = 1;
         this.ignoredSign *= Mathf.Sign(ignoredSign);
-        Debug.Log(this.ignoredSign);
         this.ignoredAxis = ignoredAxis;
-        Debug.Log(this.ignoredAxis);
         spawningController = currentSpawner;
         SpawnFern();
         StartCoroutine(DisableSpawnPoint());

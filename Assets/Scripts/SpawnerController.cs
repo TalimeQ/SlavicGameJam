@@ -56,7 +56,6 @@ public class SpawnerController : MonoBehaviour
         FernIgnore ignoredAxis = FernIgnore.ignoreX;
         float ignoredSign = 1;
         CompareSpawnedPosition(spawnTransform, out ignoredAxis, out ignoredSign);
-        Debug.Log(ignoredAxis);
         GameObject currentSpawner = Instantiate(plantObject, spawnTransform.position, Quaternion.identity, transform);
         spawners.Add(currentSpawner);
         currentSpawner.GetComponent<SpawnPoint>()?.Init(this, ignoredAxis, ignoredSign);
