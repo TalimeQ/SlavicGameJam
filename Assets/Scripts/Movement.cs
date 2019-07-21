@@ -5,8 +5,10 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     [SerializeField] float RotateSpeed = 100; //only for rotating with arrows
+    [SerializeField] float keyboardRotationSpeed = 3.0f;
     [SerializeField] float KeyboardSpeed = 8;
     [SerializeField] float PadSpeed = 8;
+
     Rigidbody2D rigid;
     private Vector2 direction;
     private AudioSource audioSource;
@@ -50,10 +52,13 @@ public class Movement : MonoBehaviour
 
         if(MovementManager.singleton.Mode != MovementManager.MovementMode.pads)
         {
-            Vector3 diff = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-            diff.Normalize();
-            float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
+            //  Vector3 diff = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            //diff.Normalize();
+            //float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
+            float rotationChange = Input.GetAxis("Vertical");
+            Vector3 oldRot = transform.rotation.eulerAngles;
+            oldRot += new Vector3(0, 0, 1) * rotationChange * RotateSpeed * Time.deltaTime * keyboardRotationSpeed;
+            transform.rotation = Quaternion.Euler(oldRot);
         }
         else
             transform.Rotate(0, 0, Input.GetAxis("Rotate_Joystick2") * RotateSpeed * Time.deltaTime);
