@@ -94,6 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6095cea7e0c2d304f81a265959cc875c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minimalDeltaRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!61 &5320242039825804268
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -389,6 +390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RotateSpeed: 100
+  keyboardRotationSpeed: 3
   KeyboardSpeed: 6
   PadSpeed: 6
 --- !u!58 &971276034602923592
@@ -419,7 +421,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 1843ca3630b0d864084ecf904208f3da, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0

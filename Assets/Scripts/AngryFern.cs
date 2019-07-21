@@ -52,7 +52,7 @@ public class AngryFern : MonoBehaviour
         if (health <= 0  && !isDead)
         {
             Instantiate(plantParticleSystem, transform.position, plantParticleSystem.transform.rotation);
-            AudioSource.PlayClipAtPoint(deathAudioClip, transform.position);
+            AudioSource.PlayClipAtPoint(deathAudioClip, transform.position, 0.5f);
             isDead = true;
             playerWeaponRef.RemoveFern(this);
             health = 0;
