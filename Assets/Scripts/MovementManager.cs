@@ -40,7 +40,10 @@ public class MovementManager : MonoBehaviour
             for (int i = 0; i < temp.Length; ++i)
             {
                 if (!string.IsNullOrEmpty(temp[i]))
+                {
+                    Debug.Log("nr = " + i);
                     countpads++;
+                }
             }
         }
         if (countpads == 0)
@@ -61,6 +64,7 @@ public class MovementManager : MonoBehaviour
             if (!SecondPlayer.activeInHierarchy)
                 ActivateSecondPlayer();
         }
+        Debug.Log(countpads);
     }
 
 

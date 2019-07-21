@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 163155bad119b1547a6431569b13bb40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  growthRate: 3
+  growthRate: 5
   maxHealth: 2
   minimalRange: 0.5
   maximalRange: 0.7

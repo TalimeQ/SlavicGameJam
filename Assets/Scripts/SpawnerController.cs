@@ -53,8 +53,8 @@ public class SpawnerController : MonoBehaviour
 
     private void CreateSpawner(Transform spawnTransform)
     {
-        FernIgnore ignoredAxis;
-        float ignoredSign;
+        FernIgnore ignoredAxis = FernIgnore.ignoreX;
+        float ignoredSign = 1;
         CompareSpawnedPosition(spawnTransform, out ignoredAxis, out ignoredSign);
         GameObject currentSpawner = Instantiate(plantObject, spawnTransform.position, Quaternion.identity, transform);
         spawners.Add(currentSpawner);

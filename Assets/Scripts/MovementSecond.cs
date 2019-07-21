@@ -21,6 +21,8 @@ public class MovementSecond : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(Input.GetAxis("Horizontal_Joystick1"));
+        Debug.Log(Input.GetAxis("Horizontal_Joystick2"));
         transform.Rotate(0, 0, Input.GetAxis("Rotate_Joystick1") * RotateSpeed * Time.deltaTime);
         direction = new Vector2(Input.GetAxis("Horizontal_Joystick1"), Input.GetAxis("Vertical_Joystick1"));
 
