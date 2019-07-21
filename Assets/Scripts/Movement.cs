@@ -22,6 +22,7 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
+     //   Debug.Log(Input.GetAxis("Horizontal_Joystick2"));
         if(MovementManager.singleton.Mode != MovementManager.MovementMode.pads)
             direction = new Vector2(Input.GetAxis("Horizontal_Keyboard"), Input.GetAxis("Vertical_Keyboard"));
         else
