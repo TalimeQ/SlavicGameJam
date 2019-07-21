@@ -12,9 +12,20 @@ namespace PlayerCombat
 
     public class PlayerWeapon : MonoBehaviour
     {
+        [SerializeField] Quaternion minimalDeltaRot;
+
         private float damage = 0.5f;
         private DamageType currentDamageType = DamageType.Green;
         private HashSet<AngryFern> currentlyCollidingFerns = new HashSet<AngryFern>();
+
+        Quaternion newRot;
+        Quaternion lastRot;
+
+        private void Start()
+        {
+            newRot = transform.rotation;
+            lastRot = transform.rotation;
+        }
 
         public void OnWeaponSwitch()
         {
@@ -27,14 +38,30 @@ namespace PlayerCombat
             currentlyCollidingFerns.Remove(fernToCut);
         }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+        public void Update()
+        {
+            if (Time.frameCount % 2 == 0)
+            {
+                lastRot = transform.rotation;
+            }
+            else
+            {
+                newRot = transform.rotation;
+            }
+        }
+
+        private void OnTriggerStay2D(Collider2D collision)
         {
             AngryFern fernToCut = collision.GetComponent<AngryFern>();
-            fernToCut.OnWeaponDamaged(damage, this);
-            if(fernToCut != null)
+           
+            if(Quaternion.Angle(newRot,lastRot) > 1.0f)
+            {
+                fernToCut.OnWeaponDamaged(damage, this);
+            }
+         /*   if(fernToCut != null)
             {
                 currentlyCollidingFerns.Add(fernToCut);
-            }
+            }*/
         }
 
         private void OnTriggerExit2D(Collider2D collision)
@@ -42,7 +69,7 @@ namespace PlayerCombat
             AngryFern fernToCut = collision.GetComponent<AngryFern>();
             if (fernToCut != null)
             {
-                currentlyCollidingFerns.Remove(fernToCut);
+                //currentlyCollidingFerns.Remove(fernToCut);
             }
         }
     }
